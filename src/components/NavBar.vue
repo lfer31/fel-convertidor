@@ -14,7 +14,7 @@ const toggleNavbar = () => {
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <strong>Convertidor de Pequeño contribuyente</strong>
+          <strong>Convertidor de Pequeño contribuyente By LuisFer</strong>
         </a>
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarContent"
           @click="toggleNavbar">
