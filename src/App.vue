@@ -14,6 +14,18 @@ const convertToExcel = (json) => {
   convertJsonToXLS(json, fileName, headers);
 }
 
+const saveAsExcel = (json) => {
+  const fileName = 'output.xlsx';
+  const headers = ['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto'];
+  const blob = convertJsonToXLS(json, headers);
+
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
 </script>
 
 <template>
@@ -32,7 +44,9 @@ const convertToExcel = (json) => {
           :totalColumns="['total','impuesto','invoiceCount']"
           :headers="['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto','invoiceCount']" />
         <div v-if="dailySummary.length > 0" class="has-text-centered">
-          <button class="button is-primary mt-2" @click="convertToExcel(dailySummary)">Convertir a Excel</button>
+          <button class="button is-primary mt-2" @click="saveAsExcel(dailySummary)">
+            Convertir a Excel
+          </button>
         </div>
       </div>
     </section>

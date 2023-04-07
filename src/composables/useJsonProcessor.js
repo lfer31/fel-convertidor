@@ -69,8 +69,9 @@ export default function useJsonProcessor() {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     const xlsData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-    const blob = new Blob([xlsData], { type: 'application/octet-stream' });
-    saveAs(blob, fileName);
+    // const blob = new Blob([xlsData], { type: 'application/octet-stream' });
+    // saveAs(blob, fileName);
+    return new Blob([xlsData], { type: 'application/octet-stream' });
   }
 
 
