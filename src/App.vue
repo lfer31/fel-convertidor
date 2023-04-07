@@ -1,6 +1,7 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import FileUpload from './components/FileUpload.vue'
+import FilePod from './components/FilePod.vue'
 import JsonTable from './components/JsonTable.vue';
 
 import useFileProcessor from '@/composables/useFileProcessor';
@@ -22,7 +23,8 @@ const convertToExcel = (json) => {
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-half">
-            <FileUpload />
+            <!-- <FileUpload /> -->
+            <FilePod />
           </div>
         </div>
         <JsonTable v-if="dailySummary.length > 0" 

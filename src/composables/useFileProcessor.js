@@ -44,11 +44,17 @@ export default function useFileProcessor() {
     reader.readAsBinaryString(file);
   }
 
+  function clearData() {
+    dailySummary.value = [];
+    extractedData.value = [];
+  }
+
   return {
     processing,
     processFile,
     dailySummary,
     extractedData,
-    convertJsonToXLS
+    convertJsonToXLS,
+    clearData
   };
 }
