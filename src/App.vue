@@ -1,6 +1,6 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
-import FileUpload from './components/FileUpload.vue'
+// import FileUpload from './components/FileUpload.vue'
 import FilePod from './components/FilePod.vue'
 import JsonTable from './components/JsonTable.vue';
 
@@ -10,21 +10,21 @@ const { dailySummary, convertJsonToXLS } = useFileProcessor();
 
 const convertToExcel = (json) => {
   const fileName = 'output.xlsx';
-  const headers = ['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura','total','exento','impuesto'];
+  const headers = ['date', 'tipoDTE', 'serie','primeraFactura', 'ultimaFactura','total','exento','impuesto'];
   convertJsonToXLS(json, fileName, headers);
 }
 
-const saveAsExcel = (json) => {
-  const fileName = 'output.xlsx';
-  const headers = ['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto'];
-  const blob = convertJsonToXLS(json, headers);
+// const saveAsExcel = (json) => {
+//   const fileName = 'output.xlsx';
+//   const headers = ['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto'];
+//   const blob = convertJsonToXLS(json, headers);
 
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = fileName;
-  link.click();
-  URL.revokeObjectURL(link.href);
-}
+//   const link = document.createElement('a');
+//   link.href = URL.createObjectURL(blob);
+//   link.download = fileName;
+//   link.click();
+//   URL.revokeObjectURL(link.href);
+// }
 
 </script>
 
@@ -42,9 +42,9 @@ const saveAsExcel = (json) => {
         <JsonTable v-if="dailySummary.length > 0" 
           :data="dailySummary" 
           :totalColumns="['total','impuesto','invoiceCount']"
-          :headers="['date', 'tipoDTE', 'primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto','invoiceCount']" />
+          :headers="['date', 'tipoDTE', 'serie','primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto','invoiceCount']" />
         <div v-if="dailySummary.length > 0" class="has-text-centered">
-          <button class="button is-primary mt-2" @click="saveAsExcel(dailySummary)">
+          <button class="button is-primary mt-2" @click="convertToExcel(dailySummary)">
             Convertir a Excel
           </button>
         </div>
