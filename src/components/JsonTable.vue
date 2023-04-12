@@ -8,7 +8,13 @@
     </thead>
     <tbody>
       <tr v-for="(row, rowIndex) in data" :key="rowIndex">
-        <td v-for="(header, colIndex) in headers" :key="colIndex">{{ formato(row[header]) }}</td>
+        <td v-for="(header, colIndex) in headers" :key="colIndex">
+          {{
+            totalColumns.includes(header)
+              ? formato(row[header])
+              : row[header]
+          }}
+        </td>
       </tr>
     </tbody>
     <tfoot v-if="totalColumns.length > 0">
