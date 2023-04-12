@@ -6,12 +6,11 @@ import JsonTable from './components/JsonTable.vue';
 
 import useFileProcessor from '@/composables/useFileProcessor';
 
-const { dailySummary, convertJsonToXLS } = useFileProcessor();
+const { dailySummary, convertJsonToXLS, extractedData } = useFileProcessor();
 
-const convertToExcel = (json) => {
+const convertToExcel = ({ data, headers }) => {
   const fileName = 'output.xlsx';
-  const headers = ['date', 'tipoDTE', 'serie','primeraFactura', 'ultimaFactura','total','exento','impuesto'];
-  convertJsonToXLS(json, fileName, headers);
+  convertJsonToXLS(data, fileName, headers);
 }
 
 // const saveAsExcel = (json) => {
@@ -39,12 +38,12 @@ const convertToExcel = (json) => {
             <FilePod />
           </div>
         </div>
-        <JsonTable v-if="dailySummary.length > 0" 
-          :data="dailySummary" 
-          :totalColumns="['total','impuesto','invoiceCount']"
-          :headers="['date', 'tipoDTE', 'serie','primeraFactura', 'ultimaFactura', 'total', 'exento', 'impuesto','invoiceCount']" />
-        <div v-if="dailySummary.length > 0" class="has-text-centered">
-          <button class="button is-primary mt-2" @click="convertToExcel(dailySummary)">
+        <JsonTable
+          :data="extractedData.data" 
+          :totalColumns="['montoGranTotal']"
+          :headers="extractedData.headers" />
+        <div v-if="Object.keys(extractedData).length > 0" class="has-text-centered">
+          <button class="button is-primary mt-2" @click="convertToExcel(extractedData)">
             Convertir a Excel
           </button>
         </div>

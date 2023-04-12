@@ -4,10 +4,10 @@ import * as XLSX from 'xlsx';
 import useJsonProcessor from '@/composables/useJsonProcessor';
 
 const dailySummary = ref([]); // Agrega una ref para dailySummary
+const extractedData = ref([]); // Agrega una ref para extractedData
 
 export default function useFileProcessor() {
   const processing = ref(false);
-  const extractedData = ref([]); // Agrega una ref para extractedData
   
   const { extractColumns, generateDailySummary, convertJsonToXLS } = useJsonProcessor();
 

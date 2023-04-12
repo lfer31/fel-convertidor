@@ -17,20 +17,28 @@ export default function useJsonProcessor() {
     const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
     console.log('json extract sheet')
     console.log(json)
-    const headers = {
-      fechaEmision: json[0][0], // Asume que "Fecha de emisión" está en la columna 0 (A)
-      tipoDTE: json[0][2], // Asume que "Tipo DTE" está en la columna 2 (C)
-      serie: json[0][3], // Asume que "Serie" está en la columna 3 (D)
-      numeroDTE: json[0][4], // Asume que "Número del DTE" está en la columna 4 (E)
-      montoGranTotal: json[0][14], // Asume que "Monto (Gran Total)" está en la columna 14 (O)
-    };
+    const headers = [
+      'fechaEmision',
+      'autorizacion',
+      'serie',
+      'numeroDTE',
+      'establecimiento',
+      'receptor',
+      'moneda',
+      'montoGranTotal',
+      'estado'
+    ];
     
     const data = json.slice(1).map(row => ({ // Excluye la primera fila y mapea las filas restantes
-      fechaEmision: formatDateTime(row[0]), // Formatea la "Fecha de emisión" usando Luxon
-      tipoDTE: 'DTE',
+      fechaEmision: formatDateTime(row[0]).split(' ')[0], // Formatea la "Fecha de emisión" usando Luxon
+      autorizacion: row[1],
       serie: row[3],
       numeroDTE: row[4],
+      establecimiento: row[7],
+      receptor: row[10],
+      moneda: row[13],
       montoGranTotal: row[14],
+      estado: row[15],
       impuestoFiscal: +calculoImpto(row[14])
     }));
 

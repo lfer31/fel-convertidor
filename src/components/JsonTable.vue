@@ -23,6 +23,9 @@
           <template v-if="totalColumns.includes(header)">{{ formato(getColumnTotal(header)) }}</template>
         </td>
       </tr>
+      <tr>
+        <td>Count: {{  data.length }}</td>
+      </tr>
     </tfoot>
   </table>
 </template>
