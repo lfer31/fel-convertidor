@@ -44,7 +44,7 @@ export default function useJsonProcessor() {
     const dailySummary = jsonData.reduce((summary, row) => {
       const date = row.fechaEmision.split(' ')[0]; // Obtiene la fecha sin la hora
       
-      const elementRow = `${row.numeroDTE}`
+      const elementRow = `${row.serie}-${row.numeroDTE}`
 
       if (!summary[date]) {
         summary[date] = {
@@ -53,7 +53,7 @@ export default function useJsonProcessor() {
           invoiceCount: 0,
           exento: '',
           impuesto: 0,
-          serie: row.serie,
+          serie: '',
           primeraFactura: elementRow,
           ultimaFactura: elementRow,
           tipoDTE: row.tipoDTE
